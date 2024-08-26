@@ -65,7 +65,7 @@ void loop() {
       if (headlines.length() > 0) {
         Serial.println("Headlines extracted:");
         Serial.println(headlines);
-        scroller.scrollText(headlines.c_str(), 100, 100);  // Scroll the extracted headlines
+        scroller.scrollText(headlines.c_str(), 50, 100);  // Scroll the extracted headlines
       } else {
         Serial.println("No headlines found in the response");
       }
