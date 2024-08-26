@@ -1,0 +1,67 @@
+# Arduino UNO R4 WiFi News Scroller
+
+This project connects an Arduino UNO R4 WiFi to the NewsAPI to fetch the latest news headlines and display them on an LED matrix. The headlines are scrolled across the matrix in a continuous loop.
+
+## Features
+
+- Connects to Wi-Fi to fetch the latest top headlines using the NewsAPI.
+- Scrolls news headlines on an 8x12 LED matrix.
+- News headlines are refreshed every 60 seconds.
+- Supports simple JSON parsing to extract headlines from the API response.
+
+## Hardware Requirements
+
+- Arduino UNO R4 WiFi
+- 8x12 LED Matrix
+- Wi-Fi Network
+
+## Software Requirements
+
+- Arduino IDE
+- `WiFiS3` library (comes with the Arduino UNO R4 WiFi package)
+- NewsAPI Key (you can get one for free at [newsapi.org](https://newsapi.org))
+
+## Getting Started
+
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/yourusername/arduino-uno-r4-wifi-news-scroller.git
+
+               Open the project in the Arduino IDE.
+
+Install the necessary libraries:
+
+ArduinoGraphics.h
+Arduino_LED_Matrix.h
+WiFiS3.h
+Create the secrets.h file in the same directory as your sketch. You can use the template provided below.
+
+secrets.h Template
+#ifndef SECRETS_H
+#define SECRETS_H
+
+// WiFi credentials and NewsAPI key
+#define WIFI_SSID "your_SSID_here"
+#define WIFI_PASSWORD "your_PASSWORD_here"
+#define NEWS_API_KEY "your_NEWSAPI_KEY_here"
+
+#endif
+
+
+Open the secrets.h file and replace the placeholder values with your Wi-Fi SSID, password, and NewsAPI key.
+
+Upload the sketch to your Arduino UNO R4 WiFi.
+
+Open the Serial Monitor at 115200 baud to debug and ensure that the Arduino is connected to Wi-Fi and fetching news correctly.
+
+Files Included
+Wifi-News.ino: The main Arduino sketch that handles Wi-Fi connection, fetching news from the API, and scrolling the headlines.
+TextScroll.h: The header file that contains the logic for scrolling text on the LED matrix.
+secrets.h: A template file for storing your Wi-Fi credentials and NewsAPI key.
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+Notes
+Make sure you have a stable Wi-Fi connection to ensure uninterrupted news fetching.
+You need a valid API key from NewsAPI to fetch the latest headlines. You can sign up for a free API key at NewsAPI.
