@@ -14,7 +14,7 @@ class TextScroller {
       matrix.begin();  // Initialize the matrix
     }
 
-    void scrollText(const char* text, int scrollSpeed = 100, int delayTime = 100) {
+    void scrollText(const char* text, int scrollSpeed = 500, int delayTime = 50) {
       matrix.beginDraw();  // Start drawing on the matrix
 
       matrix.stroke(0xFFFFFF);  // Set the color to white
