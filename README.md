@@ -1,19 +1,22 @@
-# Pong Game on Arduino UNO R4 WiFi
-This project implements a classic Pong game using an Arduino UNO R4 WiFi and an LED matrix. Two AI-controlled players continuously play against each other, with movement rules where each player can only move after the other player hits the ball.
+# Pong AI Plus
 
-The game will start slow, but it will speed up.
+Pong AI Plus is an enhanced version of the classic Pong game, designed for the Arduino UNO R4 WiFi. This version introduces advanced AI that predicts the ball's trajectory and moves the paddles accordingly. With adjustable difficulty levels, you can fine-tune the challenge to suit your preferences.
 
 Features
-AI-controlled paddles
-Dynamic game speed
-Continuous play with reset functionality
-How to Run
-Connect your Arduino UNO R4 WiFi to your computer.
-Upload the provided code to your Arduino.
-Watch the AI players battle it out!
+Dynamic AI: AI predicts the ball's landing position and moves intelligently.
+Difficulty Levels: Choose from Easy, Medium, or Hard difficulty.
+Scoring System: Track player scores on the Serial Monitor.
 Requirements
 Arduino UNO R4 WiFi
 LED Matrix
 Arduino IDE
+Installation
+Download the code and open it in the Arduino IDE.
+Connect your Arduino UNO R4 WiFi.
+Upload the code to your Arduino and start playing!
+How to Play
+The game is fully AI-controlled. Both paddles will battle it out, with the score displayed on the Serial Monitor. Adjust the difficulty in the code to increase the challenge.
+
 License
-This project is open-source. Feel free to modify and improve it!
+This project is open-source and available under the MIT License. Feel free to modify and share!
+
