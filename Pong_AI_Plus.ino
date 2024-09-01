@@ -7,7 +7,7 @@ int y = 4; // starting y position
 int x = 4; // starting x position
 int b = 1; // starting y direction
 int a = 1; // starting x direction
-int speed = 300; // initial delay
+int baseSpeed = 300; // Base speed before applying the speed multiplier
 
 int paddle1Y = 4; // Paddle 1 position
 int paddle2Y = 4; // Paddle 2 position
@@ -18,7 +18,10 @@ bool player2CanMove = false;
 int scorePlayer1 = 0;
 int scorePlayer2 = 0;
 
-int difficulty = 2; // Difficulty level (1 = Easy, 2 = Medium, 3 = Hard)
+int lastHitPaddle = 0; // Track the last paddle that hit the ball
+int patternCount = 0; // Count the number of repetitive patterns
+
+int gameSpeed = 6; // Game speed, adjustable between 1 (slow) and 10 (fast)
 
 void setup() {
   Serial.begin(115200);
@@ -27,6 +30,9 @@ void setup() {
 }
 
 void loop() {
+  // Adjust the speed based on the gameSpeed setting
+  int speed = baseSpeed / gameSpeed;
+
   // Clear previous paddle positions
   frame[paddle1Y][0] = 0;
   frame[paddle1Y + 1][0] = 0;
@@ -62,17 +68,35 @@ void loop() {
     b = -b;
   }
 
-  // Ball collision with paddles
+  // Ball collision with paddles and pattern detection
   if (x == 1 && (y == paddle1Y || y == paddle1Y + 1)) {
     a = -a;
-    speed = max(50, speed - 20); // Increase speed
+    speed = max(10, speed - 20); // Faster speed increment
+    if (lastHitPaddle == 1) {
+      patternCount++;
+    } else {
+      patternCount = 0;
+    }
+    lastHitPaddle = 1;
     player1CanMove = false; // Lock player 1
     player2CanMove = true;  // Allow player 2 to move
   } else if (x == 10 && (y == paddle2Y || y == paddle2Y + 1)) {
     a = -a;
-    speed = max(50, speed - 20); // Increase speed
+    speed = max(10, speed - 20); // Faster speed increment
+    if (lastHitPaddle == 2) {
+      patternCount++;
+    } else {
+      patternCount = 0;
+    }
+    lastHitPaddle = 2;
     player2CanMove = false; // Lock player 2
     player1CanMove = true;  // Allow player 1 to move
+  }
+
+  // Apply nudge if repetitive pattern detected
+  if (patternCount >= 2) {
+    b += (random(-1, 2)); // Nudge the ball direction randomly
+    patternCount = 0; // Reset pattern count after nudging
   }
 
   // Check if ball is missed and update scores
@@ -103,9 +127,6 @@ void resetGame() {
   y = 4;
   a = -1;
   b = -1;
-  speed = 300;
-  player1CanMove = true;
-  player2CanMove = false;
   delay(1000); // Pause before restarting
 }
 
@@ -119,8 +140,8 @@ int predictBallY(int ballX, int ballY, int dirX, int dirY, int targetX) {
   return predictedY;
 }
 
-// Function to move paddle towards predicted position
+// Revised function to move paddle towards predicted position
 void movePaddle(int &paddleY, int targetY) {
-  if (paddleY + 1 < targetY) paddleY++;
-  if (paddleY > targetY) paddleY--;
+  if (paddleY < targetY && paddleY + 1 < 7) paddleY++;
+  if (paddleY > targetY && paddleY > 0) paddleY--;
 }
