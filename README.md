@@ -1,6 +1,8 @@
 # Pong Game on Arduino UNO R4 WiFi
 This project implements a classic Pong game using an Arduino UNO R4 WiFi and an LED matrix. Two AI-controlled players continuously play against each other, with movement rules where each player can only move after the other player hits the ball.
 
+The game will start slow, but it will speed up.
+
 Features
 AI-controlled paddles
 Dynamic game speed
